@@ -1,3 +1,6 @@
 [submodule "raw_code/npj Damon 2021/boundedline-pkg"]
 	path = raw_code/npj Damon 2021/boundedline-pkg
 	url = https://github.com/kakearney/boundedline-pkg.git
+[submodule "organized_code/npj Damon 2021/boundedline-pkg"]
+	path = organized_code/npj Damon 2021/boundedline-pkg
+	url = https://github.com/kakearney/boundedline-pkg.git

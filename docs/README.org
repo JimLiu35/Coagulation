@@ -1,0 +1,41 @@
+#+title: Controlling Positive Dynamical Biomolecular Systems
+
+* Background
+To gain the background knowledge about our current research, please read the following paper in order.
+1. [[https:www.science.org/doi/10.1126/scitranslmed.aaf5045][Targeted clinical control of trauma patient coagulation through a thrombin dynamics model]]
+2. [[https://www.nature.com/articles/s41540-021-00202-9][Personalized modulation of coagulation factors using a thrombin dynamics model to treat trauma-induced coagulopathy]]
+3. [[https:www.sciencedirect.com/science/article/abs/pii/S0005109823000031?via%3Dihub][Control of positive systems with an unknown state-dependent power law input delay and input saturation]]
+4. [[https:onlinelibrary.wiley.com/doi/10.1002/rnc.5963][Nonlinear dynamic modeling and model predictive control of thrombin generation to treat trauma-induced coagulopathy]]
+* Getting Started
+The section severs to install or setup necessary scripts to regenerate plots in the aforementioned publications.
+** Targeted clinical control of trauma patient coagulation through a thrombin dynamics model
+Comming Soon...
+** Personalized modulation of coagulation factors using a thrombin dynamics model to treat trauma-induced coagulopathy
+The source code for this paper i.e. GCM Algorithm is on our [[https://github.com/SYBORGS-Lab/GCM-Algorithm][SYBORG github repository]]. There is a detailed README file, but if you want, you can follow the following instructions to get the code and necessary third-party package installed on your local machine.
+
+The detailed notes for the source codes is available here.
+** Control of positive systems with an unknown state-dependent power law input delay and input saturation
+Comming Soon...
+** Nonlinear dynamic modeling and model predictive control of thrombin generation to treat trauma-induced coagulopathy
+The SimuLink model is available on our lab's Google Drive. Damon uploaded it to his own research ouputs folder and named the corresponding journal as "Journal 4". However, the model on the drive need be converted to a '.slx' file. Otherwise, SimuLink cannot open it. To do this,
+1. Open MATLAB
+2. In MATLAB command window, navigate to this path =SYBORGS/Research Outputs and Project Data/Member Specific Data and Output/Damon Ghetmiri/MATLAB Codes/Journal 4/Codes/WB TEG/6 Parameters - Updated/WholeBloodTEGModel_6P_B.slx (Unzipped Files)/=;
+3. Then, run =!zip -r journal4_simulink.slx '[Content_Types].xml' _rels metadata simulink=. You can choose your own filename, but I use =journal4_simulink.slx=. Then a slx file should be available to you.
+4. To open this SimuLink Model, simply run =open_system('journal4_simulink.slx')= in the MATLAB command window.
+* Notes for source code
+These notes does not explain every single line of the source codes. They serve as complementary comments so that some trival parts are not included!
+** Personalized modulation of coagulation factors using a thrombin dynamics model to treat trauma-induced coagulopathy
+*** =GCM_Algorithm_for_TIC.m=
+- Max, min and mean CAT profiles for normal plasma samples.
+  #+begin_src matlab
+% Mean of Parameters / Max and Min of Fit to Data
+
+sys_est_Min_Nor=tf(Min_ModelParameters_Nor(4),[1 Min_ModelParameters_Nor(3) Min_ModelParameters_Nor(2) Min_ModelParameters_Nor(1)],'InputDelay',Min_ModelParameters_Nor(5));
+sys_est_Max_Nor=tf(Max_ModelParameters_Nor(4),[1 Max_ModelParameters_Nor(3) Max_ModelParameters_Nor(2) Max_ModelParameters_Nor(1)],'InputDelay',Max_ModelParameters_Nor(5));
+sys_est_Mean_Nor=tf(Mean_ModelParameters_Nor(4),[1 Mean_ModelParameters_Nor(3) Mean_ModelParameters_Nor(2) Mean_ModelParameters_Nor(1)],'InputDelay',Mean_ModelParameters_Nor(5));
+
+T2 = linspace(0,42,124)';
+Y_est_Min_Nor = 5*impulse(sys_est_Min_Nor,T2);
+Y_est_Max_Nor = 5*impulse(sys_est_Max_Nor,T2);
+Y_est_Mean_Nor = 5*impulse(sys_est_Mean_Nor,T2);
+  #+end_src
