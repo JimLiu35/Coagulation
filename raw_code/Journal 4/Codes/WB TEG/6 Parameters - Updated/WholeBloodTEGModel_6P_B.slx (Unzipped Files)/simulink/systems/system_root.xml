@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<System>
+  <P Name="Location">[-1089, 260, -275, 793]</P>
+  <P Name="SystemRect">[0.000000, 0.000000, 0.000000, 0.000000]</P>
+  <P Name="Open">on</P>
+  <P Name="SetExecutionDomain">off</P>
+  <P Name="ExecutionDomainType">Deduce</P>
+  <P Name="ZoomFactor">107</P>
+  <P Name="ReportName">simulink-default.rpt</P>
+  <P Name="SIDHighWatermark">13</P>
+  <P Name="SimulinkSubDomain">Simulink</P>
+  <Block BlockType="Inport" Name="input" SID="1">
+    <P Name="Position">[155, 123, 185, 137]</P>
+    <P Name="ZOrder">20</P>
+  </Block>
+  <Block BlockType="Sum" Name="Sum" SID="13">
+    <P Name="Ports">[2, 1]</P>
+    <P Name="Position">[545, 120, 565, 140]</P>
+    <P Name="ZOrder">23</P>
+    <P Name="Inputs">|++</P>
+    <Port>
+      <P Name="PortNumber">1</P>
+    </Port>
+  </Block>
+  <Block BlockType="TransferFcn" Name="Transfer Fcn" SID="3">
+    <P Name="Position">[395, 106, 470, 154]</P>
+    <P Name="ZOrder">18</P>
+    <P Name="Numerator">[Kn1]</P>
+    <P Name="Denominator">[Kp1 1 0]</P>
+  </Block>
+  <Block BlockType="TransferFcn" Name="Transfer Fcn1" SID="12">
+    <P Name="Position">[395, 211, 470, 259]</P>
+    <P Name="ZOrder">22</P>
+    <P Name="Numerator">[-Kn2]</P>
+    <P Name="Denominator">[Kp2 1 0]</P>
+  </Block>
+  <Block BlockType="TransportDelay" Name="Transport&#xA;Delay" SID="5">
+    <P Name="Ports">[1, 1]</P>
+    <P Name="Position">[270, 110, 310, 150]</P>
+    <P Name="ZOrder">19</P>
+    <P Name="HideAutomaticName">off</P>
+    <P Name="DelayTime">Kd1</P>
+  </Block>
+  <Block BlockType="TransportDelay" Name="Transport&#xA;Delay1" SID="11">
+    <P Name="Ports">[1, 1]</P>
+    <P Name="Position">[270, 215, 310, 255]</P>
+    <P Name="ZOrder">21</P>
+    <P Name="HideAutomaticName">off</P>
+    <P Name="DelayTime">Kd2</P>
+  </Block>
+  <Block BlockType="Outport" Name="output" SID="7">
+    <P Name="Position">[615, 123, 645, 137]</P>
+    <P Name="ZOrder">17</P>
+    <P Name="SignalName">y</P>
+    <P Name="VectorParamsAs1DForOutWhenUnconnected">off</P>
+  </Block>
+  <Line>
+    <P Name="ZOrder">7</P>
+    <P Name="Src">1#out:1</P>
+    <P Name="Points">[53, 0]</P>
+    <Branch>
+      <P Name="ZOrder">25</P>
+      <P Name="Points">[0, 105]</P>
+      <P Name="Dst">11#in:1</P>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">24</P>
+      <P Name="Dst">5#in:1</P>
+    </Branch>
+  </Line>
+  <Line>
+    <P Name="ZOrder">8</P>
+    <P Name="Src">5#out:1</P>
+    <P Name="Dst">3#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">20</P>
+    <P Name="Src">13#out:1</P>
+    <P Name="Dst">7#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">21</P>
+    <P Name="Src">3#out:1</P>
+    <P Name="Dst">13#in:1</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">22</P>
+    <P Name="Src">12#out:1</P>
+    <P Name="Points">[80, 0]</P>
+    <P Name="Dst">13#in:2</P>
+  </Line>
+  <Line>
+    <P Name="ZOrder">23</P>
+    <P Name="Src">11#out:1</P>
+    <P Name="Dst">12#in:1</P>
+  </Line>
+</System>
