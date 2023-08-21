@@ -38,7 +38,7 @@ Range_T_peak_Mean= T2(i_m) ;
 Range_Area_Mean= trapz(T2,Y_est_Mean_Nor ) ;
 Range_Delay_Mean=DetermineDelayTherapy(T2,Y_est_Mean_Nor);
 
-Range_Peak=[Range_peak_Min Range_peak_Mean Range_peak_Max];
+Range_Peak=[Range_peak_Min Range_peak_Mean Range_peak_Max]
 Range_T_Peak=[Range_T_peak_Max Range_T_peak_Mean Range_T_peak_Min];
 Range_Area=[Range_Area_Min Range_Area_Mean Range_Area_Max];
 Range_Delay=[Range_Delay_Max Range_Delay_Mean Range_Delay_Min];
@@ -50,20 +50,20 @@ Range_Delay=[Range_Delay_Max Range_Delay_Mean Range_Delay_Min];
 % factor_concen_Tra_sample_initial(1,1)=input('What is factor II concentration? ') ;
 % factor_concen_Tra_sample_initial(1,2)=input('What is factor V concentration? ') ;
 % factor_concen_Tra_sample_initial(1,3)=input('What is factor VII concentration? ') ;
-% factor_concen_Tra_sample_initial(1,4)=input('What is factor IX concentration? ') ;
+% factor_concen_Tra_sample_initial(1,4)=inpukkkt('What is factor IX concentration? ') ;
 % factor_concen_Tra_sample_initial(1,5)=input('What is factor X concentration? ') ;
 % factor_concen_Tra_sample_initial(1,6)=input('What is factor VIII concentration? ') ;
 % factor_concen_Tra_sample_initial(1,7)=input('What is factor ATIII concentration? ') ;
 % factor_concen_Tra_sample_initial(1,8)=input('What is Protein C concentration? ') ;
 
-factor_concen_Tra_sample_initial(1,1)=85 ;
-factor_concen_Tra_sample_initial(1,2)=44 ;
-factor_concen_Tra_sample_initial(1,3)=97 ;
-factor_concen_Tra_sample_initial(1,4)=119 ;
+factor_concen_Tra_sample_initial(1,1)=126 ;
+factor_concen_Tra_sample_initial(1,2)=64 ;
+factor_concen_Tra_sample_initial(1,3)=100 ;
+factor_concen_Tra_sample_initial(1,4)=110 ;
 factor_concen_Tra_sample_initial(1,5)=86 ;
-factor_concen_Tra_sample_initial(1,6)=305 ;
-factor_concen_Tra_sample_initial(1,7)=103 ;
-factor_concen_Tra_sample_initial(1,8)=100 ;
+factor_concen_Tra_sample_initial(1,6)=188 ;
+factor_concen_Tra_sample_initial(1,7)=87 ;
+factor_concen_Tra_sample_initial(1,8)=113 ;
  
 %% CAT Variation with factor recommendation adjustments Sample by sample 
 T3 = linspace(0,42,42001)';
@@ -327,7 +327,7 @@ Y_est_Mean_Nor_Comparison = 5*impulse(sys_est_Mean_Nor,T3);
 Range_peak_Min_Comparison=max(Y_est_Min_Nor_Comparison);
 Range_peak_Max_Comparison=max(Y_est_Max_Nor_Comparison);
 Range_peak_Mean_Comparison=max(Y_est_Mean_Nor_Comparison);
-Range_Peak=[Range_peak_Min_Comparison Range_peak_Mean_Comparison Range_peak_Max_Comparison];
+Range_Peak=[Range_peak_Min_Comparison Range_peak_Mean_Comparison Range_peak_Max_Comparison]
 
 %Current CAT after Step 5 adjustment 
 Trau_1_coeff=FactorConcentration_History_TraSample(end,:)*factor_coeff_All_Train+const_All_Train;

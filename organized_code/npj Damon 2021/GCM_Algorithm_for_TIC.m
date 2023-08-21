@@ -104,7 +104,7 @@ T_est_change_Tra_peak= T3(i_m) ;
 AreaUnderCurve= trapz(T3,Y_est_change_Tra ) ;
 DelayCurve=DetermineDelayTherapy(T3,Y_est_change_Tra);
 
-Factor_Tra_changes_treat{1,j}=[factor_concen_Tra_sample(j) Y_est_change_Tra_peak T_est_change_Tra_peak AreaUnderCurve DelayCurve]
+Factor_Tra_changes_treat{1,j}=[factor_concen_Tra_sample(j) Y_est_change_Tra_peak T_est_change_Tra_peak AreaUnderCurve DelayCurve];
 % Forming the mappifng function from factor concentration to graph parameter
 
     for i=1:10 
@@ -128,7 +128,7 @@ Factor_Tra_changes_treat{1,j}=[factor_concen_Tra_sample(j) Y_est_change_Tra_peak
 
     end
 
-Factor_Tra_changes_treat_Mat=cell2mat(Factor_Tra_changes_treat)
+Factor_Tra_changes_treat_Mat=cell2mat(Factor_Tra_changes_treat);
 factor_param_fit=polyfit(Factor_Tra_changes_treat_Mat(:,2),Factor_Tra_changes_treat_Mat(:,1),2); %a second order polynomial from peak to factor II
 recommend_factor_update=min(max(60, polyval(factor_param_fit, Range_Peak(2))),140);
 

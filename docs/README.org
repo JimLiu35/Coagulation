@@ -199,6 +199,7 @@ end
 
   Here arise a QUESTION. In the paper, Damon said in step 7, the decision was made based upon two model parameters, Peak and Thrombin potential (area under the curve). Instead of using area, he used the impulse responses from time step 12500 to 22500. Why not just using the =trapz= function to directly calculate the area? \\
   \\
+
   If additional adjustments are required, figuring out which factor we'd like to change follows next.
   #+begin_src matlab
 %CHoose what factor to change
