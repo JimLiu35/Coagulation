@@ -86,7 +86,7 @@ if FactorConcentration_History_TraSample(1,6)>400
     FactorConcentration_History_TraSample(1,6)=FactorConcentration_History_TraSample(1,6)/2;
 end
   #+end_src
-- Step 3 to 6, adjust individual factor concentration.
+- Step 3 to 6, adjust individual factor concentration. Code for these steps are almost the same. The only difference lies in which model parameters are used to polyfit against the factor concentrations.
 
   #+begin_src matlab
 %STEP 3: adjusting factor II to correct peak
@@ -170,4 +170,6 @@ Factor_Tra_changes_treat{1,j}=[factor_concen_Tra_sample(j) Y_est_change_Tra_peak
   FactorConcentration_History_TraSample(end,j)=recommend_factor_update;
     #+end_src
     Since the most significant impacts on the CAT Peak arise from changes in factor II, Damon chose to fit the factor II concentrations using a 2nd order polynomial against the peak values, i.e. =polyfit(X, Y, N) = polyfit(peak_values, factorII_concen, 2)=. Then, by given the mean value of peak (i.e. =Range_Peak(2)=), the =polyval= function outputs the corresponding factor II concentration to achieve the mean peak value. Finally, compare the =polyval= output with the boundaries (60 and 140), and update the recommend factor concentration.
-- QUESTION: In this
+- QUESTION: Step 4 adjusts factor X. Similar to step 3, Damon fits the factor X concentrations using a 2nd order polynomial against the peak values. However, in paper, Damon claimed that factor X supplement the peak correct of factor II coz it may be saturated. It also compensates the peak time and affects the time delay. The algorithm does neither manifest when factor II will be saturated nor does it consider the impacts factor X have on peak time and time delay. In addition, the step 4 title, =%STEP 4: adding factor X to correct peak and peak time=, specifically states peak-time correction, but nothing in this part of code related to peak time! *This problem may be trivial but it does not make sense!*
+- QUESTION: After step 6, Damon re-adjust the factor II? Why??? Mistake?
+- Step 7 (optional) additional adjustment

@@ -1,19 +1,19 @@
 
 # Table of Contents
 
-1.  [Background](#org7fd2cc5)
-2.  [Getting Started](#orgdd3d621)
-    1.  [Targeted clinical control of trauma patient coagulation through a thrombin dynamics model](#org6503a92)
-    2.  [Personalized modulation of coagulation factors using a thrombin dynamics model to treat trauma-induced coagulopathy](#orgd74179a)
-    3.  [Control of positive systems with an unknown state-dependent power law input delay and input saturation](#org12c1d21)
-    4.  [Nonlinear dynamic modeling and model predictive control of thrombin generation to treat trauma-induced coagulopathy](#orgfd069ff)
-3.  [Notes for source code](#org4920dc7)
-    1.  [Personalized modulation of coagulation factors using a thrombin dynamics model to treat trauma-induced coagulopathy](#org4e99542)
-        1.  [`GCM_Algorithm_for_TIC.m`](#orgce233d2)
+1.  [Background](#org502b3c1)
+2.  [Getting Started](#org7600707)
+    1.  [Targeted clinical control of trauma patient coagulation through a thrombin dynamics model](#org7e4b254)
+    2.  [Personalized modulation of coagulation factors using a thrombin dynamics model to treat trauma-induced coagulopathy](#orgf43a594)
+    3.  [Control of positive systems with an unknown state-dependent power law input delay and input saturation](#org1ead668)
+    4.  [Nonlinear dynamic modeling and model predictive control of thrombin generation to treat trauma-induced coagulopathy](#org890130f)
+3.  [Notes for source code](#org9066e83)
+    1.  [Personalized modulation of coagulation factors using a thrombin dynamics model to treat trauma-induced coagulopathy](#orgdfaff65)
+        1.  [`GCM_Algorithm_for_TIC.m`](#org6097da4)
 
 
 
-<a id="org7fd2cc5"></a>
+<a id="org502b3c1"></a>
 
 # Background
 
@@ -25,21 +25,21 @@ To gain the background knowledge about our current research, please read the fol
 4.  [Nonlinear dynamic modeling and model predictive control of thrombin generation to treat trauma-induced coagulopathy](https:onlinelibrary.wiley.com/doi/10.1002/rnc.5963)
 
 
-<a id="orgdd3d621"></a>
+<a id="org7600707"></a>
 
 # Getting Started
 
 The section severs to install or setup necessary scripts to regenerate plots in the aforementioned publications.
 
 
-<a id="org6503a92"></a>
+<a id="org7e4b254"></a>
 
 ## Targeted clinical control of trauma patient coagulation through a thrombin dynamics model
 
 Comming Soon&#x2026;
 
 
-<a id="orgd74179a"></a>
+<a id="orgf43a594"></a>
 
 ## Personalized modulation of coagulation factors using a thrombin dynamics model to treat trauma-induced coagulopathy
 
@@ -48,14 +48,14 @@ The source code for this paper i.e. GCM Algorithm is on our [SYBORG github repos
 The detailed notes for the source codes is available here.
 
 
-<a id="org12c1d21"></a>
+<a id="org1ead668"></a>
 
 ## Control of positive systems with an unknown state-dependent power law input delay and input saturation
 
 Comming Soon&#x2026;
 
 
-<a id="orgfd069ff"></a>
+<a id="org890130f"></a>
 
 ## Nonlinear dynamic modeling and model predictive control of thrombin generation to treat trauma-induced coagulopathy
 
@@ -67,19 +67,19 @@ The SimuLink model is available on our lab&rsquo;s Google Drive. Damon uploaded 
 4.  To open this SimuLink Model, simply run `open_system('journal4_simulink.slx')` in the MATLAB command window.
 
 
-<a id="org4920dc7"></a>
+<a id="org9066e83"></a>
 
 # Notes for source code
 
 These notes don&rsquo;t detail every line of the source code but provide supplementary comments, omitting certain trivial parts.
 
 
-<a id="org4e99542"></a>
+<a id="orgdfaff65"></a>
 
 ## Personalized modulation of coagulation factors using a thrombin dynamics model to treat trauma-induced coagulopathy
 
 
-<a id="orgce233d2"></a>
+<a id="org6097da4"></a>
 
 ### `GCM_Algorithm_for_TIC.m`
 
@@ -141,7 +141,7 @@ These notes don&rsquo;t detail every line of the source code but provide supplem
         if FactorConcentration_History_TraSample(1,6)>400
             FactorConcentration_History_TraSample(1,6)=FactorConcentration_History_TraSample(1,6)/2;
         end
--   Step 3 to 6, adjust individual factor concentration.
+-   Step 3 to 6, adjust individual factor concentration. Code for these steps are almost the same. The only difference lies in which model parameters are used to polyfit against the factor concentrations.
     
         %STEP 3: adjusting factor II to correct peak
         
@@ -341,5 +341,7 @@ These notes don&rsquo;t detail every line of the source code but provide supplem
             FactorConcentration_History_TraSample(end,j)=recommend_factor_update;
         
         Since the most significant impacts on the CAT Peak arise from changes in factor II, Damon chose to fit the factor II concentrations using a 2nd order polynomial against the peak values, i.e. `polyfit(X, Y, N) = polyfit(peak_values, factorII_concen, 2)`. Then, by given the mean value of peak (i.e. `Range_Peak(2)`), the `polyval` function outputs the corresponding factor II concentration to achieve the mean peak value. Finally, compare the `polyval` output with the boundaries (60 and 140), and update the recommend factor concentration.
--   QUESTION: In this
+-   QUESTION: Step 4 adjusts factor X. Similar to step 3, Damon fits the factor X concentrations using a 2nd order polynomial against the peak values. However, in paper, Damon claimed that factor X supplement the peak correct of factor II coz it may be saturated. It also compensates the peak time and affects the time delay. The algorithm does neither manifest when factor II will be saturated nor does it consider the impacts factor X have on peak time and time delay. In addition, the step 4 title, `%STEP 4: adding factor X to correct peak and peak time`, specifically states peak-time correction, but nothing in this part of code related to peak time! **This problem may be trivial but it does not make sense!**
+-   QUESTION: After step 6, Damon re-adjust the factor II? Why??? Mistake?
+-   Step 7 (optional) additional adjustment
 

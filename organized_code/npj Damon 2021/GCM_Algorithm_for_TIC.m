@@ -50,20 +50,20 @@ Range_Delay=[Range_Delay_Max Range_Delay_Mean Range_Delay_Min];
 % factor_concen_Tra_sample_initial(1,1)=input('What is factor II concentration? ') ;
 % factor_concen_Tra_sample_initial(1,2)=input('What is factor V concentration? ') ;
 % factor_concen_Tra_sample_initial(1,3)=input('What is factor VII concentration? ') ;
-% factor_concen_Tra_sample_initial(1,4)=input('What is factor IX concentration? ') ;
+% factor_concen_Tra_sample_initial(1,4)=inpukkkt('What is factor IX concentration? ') ;
 % factor_concen_Tra_sample_initial(1,5)=input('What is factor X concentration? ') ;
 % factor_concen_Tra_sample_initial(1,6)=input('What is factor VIII concentration? ') ;
 % factor_concen_Tra_sample_initial(1,7)=input('What is factor ATIII concentration? ') ;
 % factor_concen_Tra_sample_initial(1,8)=input('What is Protein C concentration? ') ;
 
-factor_concen_Tra_sample_initial(1,1)=85 ;
-factor_concen_Tra_sample_initial(1,2)=44 ;
-factor_concen_Tra_sample_initial(1,3)=97 ;
-factor_concen_Tra_sample_initial(1,4)=119 ;
+factor_concen_Tra_sample_initial(1,1)=126 ;
+factor_concen_Tra_sample_initial(1,2)=64 ;
+factor_concen_Tra_sample_initial(1,3)=100 ;
+factor_concen_Tra_sample_initial(1,4)=110 ;
 factor_concen_Tra_sample_initial(1,5)=86 ;
-factor_concen_Tra_sample_initial(1,6)=305 ;
-factor_concen_Tra_sample_initial(1,7)=103 ;
-factor_concen_Tra_sample_initial(1,8)=100 ;
+factor_concen_Tra_sample_initial(1,6)=188 ;
+factor_concen_Tra_sample_initial(1,7)=87 ;
+factor_concen_Tra_sample_initial(1,8)=113 ;
  
 %% CAT Variation with factor recommendation adjustments Sample by sample 
 T3 = linspace(0,42,42001)';
