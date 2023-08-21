@@ -161,12 +161,13 @@ Factor_Tra_changes_treat{1,j}=[factor_concen_Tra_sample(j) Y_est_change_Tra_peak
   1. This tuning process is not going sequentially. In other words, it is not proceeding as -50%, -40%, ... +40%, + 50%. Instead, it jumps from -10% to +10%, then -20% to +20%, and so on.
   2. Damon reset the =factor_concen_Tra_sample= vector for every single loop. He did this because when he re-estimated the system's transfer function, he changed the corresponding factor concentration in =factor_concen_Tra_sample=. As the new factor concentration in the next iteration was based upon the original value, he had to reset the vector whenever a new iteration started.
 
-  #+begin_src matlab
-Factor_Tra_changes_treat_Mat=cell2mat(Factor_Tra_changes_treat);
-factor_param_fit=polyfit(Factor_Tra_changes_treat_Mat(:,2),Factor_Tra_changes_treat_Mat(:,1),2); %a second order polynomial from peak to factor II
-recommend_factor_update=min(max(60, polyval(factor_param_fit, Range_Peak(2))),140);
+    #+begin_src matlab
+  Factor_Tra_changes_treat_Mat=cell2mat(Factor_Tra_changes_treat);
+  factor_param_fit=polyfit(Factor_Tra_changes_treat_Mat(:,2),Factor_Tra_changes_treat_Mat(:,1),2); %a second order polynomial from peak to factor II
+  recommend_factor_update=min(max(60, polyval(factor_param_fit, Range_Peak(2))),140);
 
-FactorConcentration_History_TraSample=[FactorConcentration_History_TraSample; FactorConcentration_History_TraSample(end,:)];
-FactorConcentration_History_TraSample(end,j)=recommend_factor_update;
-  #+end_src
-  Since the most significant impacts on the CAT Peak arise from changes in factor II, Damon chose to fit the factor II concentrations using a 2nd order polynomial against the peak values, i.e. =polyfit(X, Y, N) = polyfit(peak_values, factorII_concen, 2)=. Then, by given the mean value of peak (i.e. =Range_Peak(2)=), the =polyval= function outputs the corresponding factor II concentration to achieve the mean peak value. Finally, compare the =polyval= output with the boundaries (60 and 140), and update the recommend factor concentration.
+  FactorConcentration_History_TraSample=[FactorConcentration_History_TraSample; FactorConcentration_History_TraSample(end,:)];
+  FactorConcentration_History_TraSample(end,j)=recommend_factor_update;
+    #+end_src
+    Since the most significant impacts on the CAT Peak arise from changes in factor II, Damon chose to fit the factor II concentrations using a 2nd order polynomial against the peak values, i.e. =polyfit(X, Y, N) = polyfit(peak_values, factorII_concen, 2)=. Then, by given the mean value of peak (i.e. =Range_Peak(2)=), the =polyval= function outputs the corresponding factor II concentration to achieve the mean peak value. Finally, compare the =polyval= output with the boundaries (60 and 140), and update the recommend factor concentration.
+- QUESTION: In this
