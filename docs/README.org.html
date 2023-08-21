@@ -1,5 +1,35 @@
-#+title: Controlling Positive Dynamical Biomolecular Systems
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- Created by htmlize-1.57 in css mode. -->
+<html>
+  <head>
+    <title>README.org</title>
+    <style type="text/css">
+    <!--
+      body {
+        color: #bbc2cf;
+        background-color: #282c34;
+      }
+      .hl-line {
+        /* hl-line */
+        background-color: #21242b;
+      }
 
+      a {
+        color: inherit;
+        background-color: inherit;
+        font: inherit;
+        text-decoration: inherit;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    -->
+    </style>
+  </head>
+  <body>
+    <pre>
+<span class="hl-line">#+title: Controlling Positive Dynamical Biomolecular Systems
+</span>
 * Background
 To gain the background knowledge about our current research, please read the following paper in order.
 1. [[https:www.science.org/doi/10.1126/scitranslmed.aaf5045][Targeted clinical control of trauma patient coagulation through a thrombin dynamics model]]
@@ -67,7 +97,7 @@ Range_Delay=[Range_Delay_Max Range_Delay_Mean Range_Delay_Min];
   #+end_src
   1. This part calculates the ranges for the Peak value, Peak time, Delay time, and the Area under the curve.
   2. The area is calculated via trapezoidal method, an approximation of integral.
-  3. NOTE: Damon created 4 vectors to store the min, max, and mean values for each model parameters, but the order are not the same. The order for =Range_Peak= is *min --> max --> mean*, but the order for =Range_T_Peak= is *max --> mean --> min*. One possible reason is when Peak achieves its minimum value, the time to reach the peak value is at its maximum value.
+  3. NOTE: Damon created 4 vectors to store the min, max, and mean values for each model parameters, but the order are not the same. The order for =Range_Peak= is *min --&gt; max --&gt; mean*, but the order for =Range_T_Peak= is *max --&gt; mean --&gt; min*. One possible reason is when Peak achieves its minimum value, the time to reach the peak value is at its maximum value.
 
 - Model parameters initialization
   #+begin_src matlab
@@ -82,7 +112,7 @@ FactorConcentration_History_TraSample=[FactorConcentration_History_TraSample; fa
 - QUESTION: Why do we need to half the factor VIII concentration if it exceeds 400?
   #+begin_src matlab
 %STEP 1: Correct factor V to normal range
-if FactorConcentration_History_TraSample(1,6)>400
+if FactorConcentration_History_TraSample(1,6)&gt;400
     FactorConcentration_History_TraSample(1,6)=FactorConcentration_History_TraSample(1,6)/2;
 end
   #+end_src
@@ -113,7 +143,7 @@ Factor_Tra_changes_treat{1,j}=[factor_concen_Tra_sample(j) Y_est_change_Tra_peak
   |---+----------------------+------+-----------+----------------------+---------------|
   |   | Factor Concentration | Peak | Peak Time | Area Under the Curve | Time Delay    |
   |---+----------------------+------+-----------+----------------------+---------------|
-  | / |                    < | <    | <         | <                    | <>            |
+  | / |                    &lt; | &lt;    | &lt;         | &lt;                    | &lt;&gt;            |
   |   |             Original |      |           |                      |               |
   |   |                 -10% |      |           |                      |               |
   |   |                 +10% |      |           |                      |               |
@@ -180,17 +210,17 @@ Factor_Tra_changes_treat{1,j}=[factor_concen_Tra_sample(j) Y_est_change_Tra_peak
   With both normal and recommended profiles, he initiated a comparing process to check the necessities of adjusting factor ATIII and Protein C. Here is the corresponding code block.
   #+begin_src matlab
 % Identify if peak is in the range
-if Peak_current_Tra>Range_Peak(3)
+if Peak_current_Tra&gt;Range_Peak(3)
     Current_CAT_Peak_Indicator=1; % Exceed the normal range
-elseif Range_Peak(1)>Peak_current_Tra
+elseif Range_Peak(1)&gt;Peak_current_Tra
     Current_CAT_Peak_Indicator=-1; % Below the normal range
 else
     Current_CAT_Peak_Indicator=0; % Within the normal range
 end
 % Identify if tail (between 10 and 20 minutes) is in the range
-if mean(Y_est_current_Tra(12500:22500)-Y_est_Max_Nor_Comparison(12500:22500))>0
+if mean(Y_est_current_Tra(12500:22500)-Y_est_Max_Nor_Comparison(12500:22500))&gt;0
     Current_CAT_Tail_Indicator=1;
-elseif mean(Y_est_current_Tra(8000:18000)-Y_est_Min_Nor_Comparison(8000:18000))<0
+elseif mean(Y_est_current_Tra(8000:18000)-Y_est_Min_Nor_Comparison(8000:18000))&lt;0
     Current_CAT_Tail_Indicator=-1;
 else
     Current_CAT_Tail_Indicator=0;
@@ -202,11 +232,11 @@ end
   If additional adjustments are required, figuring out which factor we'd like to change follows next.
   #+begin_src matlab
 %CHoose what factor to change
-if Current_CAT_Peak_Indicator==1 && Current_CAT_Tail_Indicator~=-1
+if Current_CAT_Peak_Indicator==1 &amp;&amp; Current_CAT_Tail_Indicator~=-1
     j=8;
     Target_Peak_Value=mean(Range_Peak(2:3));
     NeedForStep6=1;
-elseif Current_CAT_Peak_Indicator==1 && Current_CAT_Tail_Indicator==-1
+elseif Current_CAT_Peak_Indicator==1 &amp;&amp; Current_CAT_Tail_Indicator==-1
     if FactorConcentration_History_TraSample(end,5)~=140
         j=5;
     else
@@ -214,22 +244,25 @@ elseif Current_CAT_Peak_Indicator==1 && Current_CAT_Tail_Indicator==-1
     end
     Target_Peak_Value=mean(Range_Peak(2:3));
     NeedForStep6=1;
-elseif Current_CAT_Peak_Indicator==-1 && Current_CAT_Tail_Indicator==-1
+elseif Current_CAT_Peak_Indicator==-1 &amp;&amp; Current_CAT_Tail_Indicator==-1
     j=7;
     Target_Peak_Value=mean(Range_Peak(2));
     NeedForStep6=1;
-elseif Current_CAT_Peak_Indicator==0 && Current_CAT_Tail_Indicator==+1
+elseif Current_CAT_Peak_Indicator==0 &amp;&amp; Current_CAT_Tail_Indicator==+1
     j=7;
     Target_Peak_Value=Range_Peak(2);
     NeedForStep6=1;
-elseif Current_CAT_Peak_Indicator==0 && Current_CAT_Tail_Indicator==-1
+elseif Current_CAT_Peak_Indicator==0 &amp;&amp; Current_CAT_Tail_Indicator==-1
     j=7;
     Target_Peak_Value=Range_Peak(2);
     NeedForStep6=1;
-elseif Current_CAT_Peak_Indicator==-1 && Current_CAT_Tail_Indicator==0
+elseif Current_CAT_Peak_Indicator==-1 &amp;&amp; Current_CAT_Tail_Indicator==0
     FactorConcentration_History_TraSample(end,6)=(FactorConcentration_History_TraSample(5,6)+FactorConcentration_History_TraSample(4,6))/9*5;
     NeedForStep6=0;
 else
     NeedForStep6=0;
 end
   #+end_src
+</pre>
+  </body>
+</html>
