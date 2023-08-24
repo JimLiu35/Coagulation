@@ -235,3 +235,32 @@ end
   #+end_src
   QUESTION: the =Target_Peak_Value= is set to the average of mean and maximum value, why is that? \\
   QUESTION: In paper, step 7 only adjusts factor ATIII or Protein C, why there is a case that it allows to adjust factor X (i.e. j = 5)?
+
+*** =DetermineDelayTherapy.m=
+This MATLAB function returns the time delay $T$, one of the four model parameters.\\
+Inputs:
+1. =Tcheck=: a discretized time vector, e.g. =T2 = linspace(0, 42, 124)=;
+2. =MeasuredThrombin=: Impulse response of a transfer function.
+
+
+- With the above inputs, first find the half way point between 0 and the Peak before the Peak value is achieved. This point has two features:
+  1. The corresponding CAT value $= \frac{1}{2}\times Peak$;
+  2. The time of this point is less than the Peak time.
+#+begin_src matlab
+% first, find the peak value and its time index
+[MaxThrombin,MaxThrombinIndex] = max(MeasuredThrombin);
+TimeMaxThrombin = Tcheck(MaxThrombinIndex);
+
+% then, find the half way point with the above two constraints via the "find" function.
+SlopeUpperValueIndex = find(MeasuredThrombin<=0.5*MaxThrombin & Tcheck<=TimeMaxThrombin,1,'last')
+SlopeUpperValue = MeasuredThrombin(SlopeUpperValueIndex);
+SlopeUpperTime = Tcheck(SlopeUpperValueIndex);
+#+end_src
+- Next, find the point right before this half way point and calculate a slope using these two points.
+  #+begin_src matlab
+%calculate the slope with the next lower data point
+SlopeLowerValue = MeasuredThrombin(SlopeUpperValueIndex-1);
+SlopeLowerTime = Tcheck(SlopeUpperValueIndex-1);
+Slope = (SlopeUpperValue - SlopeLowerValue)/(SlopeUpperTime-SlopeLowerTime);
+  #+end_src
+- =b= and =bPerp= are y-intercepts.
