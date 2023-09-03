@@ -1,0 +1,18 @@
+#+title: Targeted clinical control of trauma patient coagulation through a thrombin dynamics model
+
+This folder contains scripts and data for the "Targeted clinical control of trauma patient coagulation through a thrombin dynamics model" paper published at 2017 by Amor Menezes.
+* Structure
+This folder must have the following structure for code to run smoothly.
+#+RESULTS:
+#+begin_example
+./
+├── Data
+│   ├── Processed
+│   ├── Raw
+│   └── Spiking
+├── Matlab
+│   ├── Data Visualization
+│   ├── Model
+│   └── Spiking
+└── README.org
+#+end_example
