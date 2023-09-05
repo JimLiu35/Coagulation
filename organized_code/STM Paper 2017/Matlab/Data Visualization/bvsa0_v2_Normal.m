@@ -1,5 +1,5 @@
 
-function bvsa0_v2_Normal
+% function bvsa0_v2_Normal
 
 clear all;
 close all;
@@ -8,6 +8,7 @@ clc;
 %% Load b and a0
 
 %Normal Thrombograms
+% Pull out data from sheet 'Fits'
 Normalb = xlsread('../../Data/Processed/CAT_Normals','Fits','E2:E21')/100;
 Normala0 = xlsread('../../Data/Processed/CAT_Normals','Fits','B2:B21');
 
@@ -26,10 +27,10 @@ clf
 
 
 subplot(2,2,2)
-%h(1) = plot(Traumaa0,Traumab,'ro','MarkerSize',12);
-%h(1) = plot(TraumaFita0,TraumaFitb,'r-.','LineWidth',6);
+% h(1) = plot(Traumaa0,Traumab,'ro','MarkerSize',12);
+h(1) = plot(TraumaFita0,TraumaFitb,'r-.','LineWidth',6);
 hold on
-%scatter(Traumaa0,Traumab,150,'Red','filled','o','MarkerEdgeColor','Black');
+scatter(Traumaa0,Traumab,150,'Red','filled','o','MarkerEdgeColor','Black');
 box on
 grid on
 
@@ -41,8 +42,8 @@ scatter(Normala0,Normalb,150,'Green','filled','d','MarkerEdgeColor','Black');
 
 xlabel('{\ita_0}')
 ylabel('{\itb}')
-%legend([h(2) h(1)], {'Normal','Trauma'},4)
-legend([h(2)], {'Normal'}, 'Location', 'southeast')
+legend([h(2) h(1)], {'Normal','Trauma'},'Location', 'southeast')
+% legend([h(2)], {'Normal'}, 'Location', 'southeast')
 title('H')
 %axis([0 1.75 0 0.45])
 
@@ -139,11 +140,10 @@ set(gca,'FontSize',30)
 % %     ylim(hAx, [0 pos(4)]+0.5)
 % % return
 
-return
+% return
 
 
 function R2ofEstimate = DetermineModelR2(Yactualdata,Ypredicteddata)
-
 
 MeanYactualdata = mean(Yactualdata);
 SStot_vec = (Yactualdata - MeanYactualdata).^2;
@@ -153,4 +153,5 @@ SSres = sum(SSres_vec);
 R2ofEstimate = 1 - SSres/SStot;
 
 
-return
+% return
+end

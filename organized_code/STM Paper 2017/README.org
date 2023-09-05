@@ -14,5 +14,4 @@ This folder must have the following structure for code to run smoothly.
 │   ├── Data Visualization
 │   ├── Model
 │   └── Spiking
-└── README.org
 #+end_example
