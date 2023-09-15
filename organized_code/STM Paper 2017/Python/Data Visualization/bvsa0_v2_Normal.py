@@ -7,6 +7,21 @@ from control.matlab import *
 # import control.matlab as ct
 import math
 
+def DelaySimulation(delayTime, Tin, sys):
+    Response = np.array([])
+    T0 = np.linspace(0, delayTime, 100)
+    # Before delayTime
+    youtBefore, Tout, xout = lsim(sys, T = T0)
+    # After delayTime
+    yout = 50 * impulse(sys, Tin)
+
+    T = np.concatenate((T0, Tin+T0[-1]), axis=None)
+    youtAfter = np.array(yout[0])
+    Y = np.concatenate((youtBefore, youtAfter), axis=None)
+    return T, Y
+
+
+
 # Declare files names
 CATN = '../../Data/Processed/CAT_Normals.xlsx'
 CATT = '../../Data/Processed/CAT_Trauma.xlsx'
@@ -57,20 +72,20 @@ SampleNormala1 = dfN['k1'].to_numpy().item(6)
 SampleNormala2 = dfN['k2'].to_numpy().item(6)
 SampleNormalb = Normalb.item(6)
 SampleNormalT = dfN['kd'].to_numpy().item(6)
-print(SampleNormalb)
 
 s = tf('s')
-# Delay approximation
-num, den = pade(SampleNormalT, 3)
-DelayApprox = tf(num, den)
 # FittedSystem = SampleNormalb/(s**3 + SampleNormala2*s**2 + SampleNormala1*s + SampleNormala0) * DelayApprox;
 FittedSystem = SampleNormalb/(s**3 + SampleNormala2*s**2 + SampleNormala1*s + SampleNormala0);
 T = np.linspace(0,45,451)
-Y = 5 * impulse(FittedSystem, T, output=-1)
+dt = 45/(451-1)
+Tout, Yout = DelaySimulation(SampleNormalT, T, FittedSystem)
+# if
+# Y = 50 * impulse(FittedSystem, T)
 
 plt.subplot(121)
-# plt.plot(T,Y, 'b-', linewidth=6)
+plt.plot(Tout,Yout, 'b-', linewidth=6)
 
-print(Y)
+# print(FittedSystem)
+# print(len(Y[0]))
 
-# plt.show()
+plt.show()
