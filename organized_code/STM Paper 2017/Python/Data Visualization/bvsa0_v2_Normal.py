@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from control.matlab import *
+from scipy import interpolate
 # import control.matlab as ct
 import math
 
@@ -19,8 +20,6 @@ def DelaySimulation(delayTime, Tin, sys):
     youtAfter = np.array(yout[0])
     Y = np.concatenate((youtBefore, youtAfter), axis=None)
     return T, Y
-
-
 
 # Declare files names
 CATN = '../../Data/Processed/CAT_Normals.xlsx'
@@ -74,18 +73,18 @@ SampleNormalb = Normalb.item(6)
 SampleNormalT = dfN['kd'].to_numpy().item(6)
 
 s = tf('s')
-# FittedSystem = SampleNormalb/(s**3 + SampleNormala2*s**2 + SampleNormala1*s + SampleNormala0) * DelayApprox;
 FittedSystem = SampleNormalb/(s**3 + SampleNormala2*s**2 + SampleNormala1*s + SampleNormala0);
 T = np.linspace(0,45,451)
 dt = 45/(451-1)
 Tout, Yout = DelaySimulation(SampleNormalT, T, FittedSystem)
-# if
-# Y = 50 * impulse(FittedSystem, T)
+
+setInterpolation = interpolate.interp1d(Tout, Yout)
+FittedDataAtSampleNormalCATTime = setInterpolation(SampleNormalCATTime)
+print(FittedDataAtSampleNormalCATTime)
+# print(SampleNormalCATTime.shape)
+# print(SampleNormalCATTime)
 
 plt.subplot(121)
 plt.plot(Tout,Yout, 'b-', linewidth=6)
 
-# print(FittedSystem)
-# print(len(Y[0]))
-
-plt.show()
+# plt.show()
