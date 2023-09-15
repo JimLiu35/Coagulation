@@ -66,8 +66,8 @@ set(gca,'FontSize',27)
 
 subplot(2,2,2)
 
-TFGradientTime = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Raw/TF_gradient_plate1','TF_gradient_020514_plate1','A18:A137');
-TFGradient = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Raw/TF_gradient_plate1','TF_gradient_020514_plate1','B18:K137')/1000;
+TFGradientTime = xlsread('../../Data/Raw/TF_gradient_plate1','TF_gradient_020514_plate1','A18:A137');
+TFGradient = xlsread('../../Data/Raw/TF_gradient_plate1','TF_gradient_020514_plate1','B18:K137')/1000;
 
 %plot(TFGradientTime,TFGradient(:,1)) %0.25
 hold on

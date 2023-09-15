@@ -5,7 +5,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from control.matlab import *
 from scipy import interpolate
-# import control.matlab as ct
 import math
 
 def DelaySimulation(delayTime, Tin, sys):
@@ -14,12 +13,21 @@ def DelaySimulation(delayTime, Tin, sys):
     # Before delayTime
     youtBefore, Tout, xout = lsim(sys, T = T0)
     # After delayTime
-    yout = 50 * impulse(sys, Tin)
+    yout = impulse(sys, Tin)
 
     T = np.concatenate((T0, Tin+T0[-1]), axis=None)
-    youtAfter = np.array(yout[0])
+    youtAfter = np.array(yout[0]) * 5
     Y = np.concatenate((youtBefore, youtAfter), axis=None)
     return T, Y
+
+def DetermineModelR2(Yactualdata, Ypredicteddata):
+    MeanYactualdata = np.mean(Yactualdata)
+    SStot_vec = (Yactualdata - MeanYactualdata)**2
+    SStot = sum(SStot_vec)
+    SSres_vec = (Yactualdata - Ypredicteddata)**2
+    SSres = sum(SSres_vec)
+    R2ofEstimate = 1 - SSres/SStot
+    return R2ofEstimate
 
 # Declare files names
 CATN = '../../Data/Processed/CAT_Normals.xlsx'
@@ -80,11 +88,19 @@ Tout, Yout = DelaySimulation(SampleNormalT, T, FittedSystem)
 
 setInterpolation = interpolate.interp1d(Tout, Yout)
 FittedDataAtSampleNormalCATTime = setInterpolation(SampleNormalCATTime)
-print(FittedDataAtSampleNormalCATTime)
-# print(SampleNormalCATTime.shape)
-# print(SampleNormalCATTime)
+R2FittedData = DetermineModelR2(SampleNormalCATData,FittedDataAtSampleNormalCATTime)
+print(R2FittedData)
 
 plt.subplot(121)
-plt.plot(Tout,Yout, 'b-', linewidth=6)
-
-# plt.show()
+g1, = plt.plot(SampleNormalCATTime,SampleNormalCATData, 'k*', linewidth=6, markersize=12)
+g2, = plt.plot(SampleNormalCATTime,0.104*SampleNormalCATTime * np.exp(-0.18*SampleNormalCATTime),'r-.',linewidth=6);
+g3, = plt.plot(SampleNormalCATTime,0.048*SampleNormalCATTime**2 * np.exp(-0.35*SampleNormalCATTime),'g--',linewidth=6);
+g4, = plt.plot(Tout,Yout, 'b-', linewidth=6)
+plt.legend(handles=[g1, g2, g3, g4], labels=['Normal CAT Data','0.104t exp(-0.18t)',
+                                             '0.048t^2 exp(-0.35t)','SDO Generated Fit'], loc='upper right')
+plt.xlim(0, 45)
+plt.ylim(-0.05, 0.25)
+plt.xlabel('$Time [min]$')
+plt.ylabel('$IIa [\mu M]$')
+plt.title('G')
+plt.show()
