@@ -8,15 +8,15 @@ clc;
 %% Load b and a0
 
 %Normal Thrombograms
-Normalb = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Normals','Fits','E2:E21')/100;
-Normala0 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Normals','Fits','B2:B21');
+Normalb = xlsread('../../Data/Processed/CAT_Normals','Fits','E2:E21')/100;
+Normala0 = xlsread('../../Data/Processed/CAT_Normals','Fits','B2:B21');
 
 NormalFita0 = min(Normala0):0.01:max(Normala0);
 NormalFitb = 0.2288116658190270*NormalFita0;
 
 %Trauma Thrombograms
-Traumab = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Fits','E2:E41')/100;
-Traumaa0 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Fits','B2:B41');
+Traumab = xlsread('../../Data/Processed/CAT_Trauma','Fits','E2:E41')/100;
+Traumaa0 = xlsread('../../Data/Processed/CAT_Trauma','Fits','B2:B41');
 
 TraumaFita0 = min(Traumaa0):0.01:max(Traumaa0);
 TraumaFitb = 0.2725060908156930*TraumaFita0;
@@ -41,7 +41,7 @@ scatter(Normala0,Normalb,150,'Green','filled','d','MarkerEdgeColor','Black');
 
 xlabel('{\ita_0}')
 ylabel('{\itb}')
-legend([h(2) h(1)], {'Normal','Trauma'},4)
+legend([h(2) h(1)], {'Normal','Trauma'},'Location','southeast')
 title('C')
 axis([0 1.75 0 0.45])
 
@@ -54,14 +54,14 @@ set(gca,'FontSize',30)
 
 subplot(2,2,1)
 
-SampleTraumaCATTime = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Dynamic','A2:A121');
-SampleTraumaCATData = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Dynamic','B2:B121')/1000;
+SampleTraumaCATTime = xlsread('../../Data/Processed/CAT_Trauma','Dynamic','A2:A121');
+SampleTraumaCATData = xlsread('../../Data/Processed/CAT_Trauma','Dynamic','B2:B121')/1000;
 
-SampleTraumaa0 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Fits','B2:B2');
-SampleTraumaa1 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Fits','C2:C2');
-SampleTraumaa2 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Fits','D2:D2');
-SampleTraumab = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Fits','E2:E2')/100;
-SampleTraumaT = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Fits','F2:F2');
+SampleTraumaa0 = xlsread('../../Data/Processed/CAT_Trauma','Fits','B2:B2');
+SampleTraumaa1 = xlsread('../../Data/Processed/CAT_Trauma','Fits','C2:C2');
+SampleTraumaa2 = xlsread('../../Data/Processed/CAT_Trauma','Fits','D2:D2');
+SampleTraumab = xlsread('../../Data/Processed/CAT_Trauma','Fits','E2:E2')/100;
+SampleTraumaT = xlsread('../../Data/Processed/CAT_Trauma','Fits','F2:F2');
 
 s = tf('s');
 
@@ -81,7 +81,7 @@ plot(T,Y,'b-','LineWidth',6);
 xlabel('Time [min]')
 ylabel('IIa [\muM]')
 axis([0 45 -0.05 0.5])
-legend('Trauma CAT Data','0.35t exp(-0.26t)','0.22t^2 exp(-0.5t)','SDO Generated Fit',1)
+legend('Trauma CAT Data','0.35t exp(-0.26t)','0.22t^2 exp(-0.5t)','SDO Generated Fit', 'Location', 'northeast')
 title('A')
 
 figureHandle = gcf;

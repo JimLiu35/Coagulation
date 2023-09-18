@@ -17,7 +17,7 @@ Control(6) = 90; %X
 Control(7) = 88; %ATIII
 
 % Read in trauma concentrations
-MCADataValues = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Fits','G2:M41');
+MCADataValues = xlsread('../../Data/Processed/CAT_Trauma','Fits','G2:M41');
 
 % Create an array, rows are trauma patient, cols are factors
 % -1 if below range, 0 if within range, +1 if above range
@@ -42,7 +42,7 @@ TraumaPatientWithinControlRangeMax = max(TraumaPatientWithinControlRange,[],2)
 %31/40 have a factor excess this way
 
 % Read in normal concentrations
-NormalConc = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Normals','Fits','G2:M21');
+NormalConc = xlsread('../../Data/Processed/CAT_Normals','Fits','G2:M21');
 
 MeanNormalConc = mean(NormalConc);
 StdDevNormalConc = std(NormalConc);
