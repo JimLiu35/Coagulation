@@ -6,7 +6,7 @@ clc
 
 %% Normals
 
-MCADataValues = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Normals','Fits','A2:M21');
+MCADataValues = xlsread('../../Data/Processed/CAT_Normals','Fits','A2:M21');
 
 Normalnum = MCADataValues(:,1);
 k0 = MCADataValues(:,2);
@@ -124,8 +124,8 @@ AverageDelay = mean(kd)
 
 %% Trauma Patients
 
-%MCADataValues = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Fits','B2:M48');
-MCADataValues = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Fits','B2:M41');
+%MCADataValues = xlsread('../../Data/Processed/CAT_Trauma','Fits','B2:M48');
+MCADataValues = xlsread('../../Data/Processed/CAT_Trauma','Fits','B2:M41');
 
 %Normalnum = MCADataValues(:,1);
 k0 = MCADataValues(:,1);

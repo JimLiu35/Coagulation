@@ -11,15 +11,15 @@ clf
 
 options = optimset('MaxFunEvals',1e6,'MaxIter',1e6,'TolFun',1e-6,'TolX',1e-6);
 
-DelFactorII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','I2:I6');
-a0DelFactorII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','B2:B6');
-a1DelFactorII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','C2:C6');
-a2DelFactorII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','D2:D6');
-bDelFactorII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','E2:E6');
-KDelFactorII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','G2:G6');
-pDelFactorII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','K2:K6');
-omeganDelFactorII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','L2:L6');
-TDelFactorII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','F2:F6');
+DelFactorII14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','I2:I6');
+a0DelFactorII14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','B2:B6');
+a1DelFactorII14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','C2:C6');
+a2DelFactorII14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','D2:D6');
+bDelFactorII14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','E2:E6');
+KDelFactorII14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','G2:G6');
+pDelFactorII14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','K2:K6');
+omeganDelFactorII14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','L2:L6');
+TDelFactorII14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','F2:F6');
 
 [fita0DelFactorII14492factors,resfita0DelFactorII14492norm] = lsqcurvefit(@fitLinearModel,[1;1],DelFactorII14492,a0DelFactorII14492,[],[],options)
 [fita1DelFactorII14492factors,resfita1DelFactorII14492norm] = lsqcurvefit(@fitLinearModel,[1;1],DelFactorII14492,a1DelFactorII14492,[],[],options)
@@ -30,15 +30,15 @@ TDelFactorII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Co
 [fitomeganDelFactorII14492factors,resfitomeganDelFactorII14492norm] = lsqcurvefit(@fitLinearModel,[1;1],DelFactorII14492,omeganDelFactorII14492,[],[],options)
 [fitTDelFactorII14492factors,resfitTDelFactorII14492norm] = lsqcurvefit(@fitLinearModel,[1;1],DelFactorII14492,TDelFactorII14492,[],[],options)
 
-DelFactorVIII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','I48:I54');
-a0DelFactorVIII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','B48:B54');
-a1DelFactorVIII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','C48:C54');
-a2DelFactorVIII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','D48:D54');
-bDelFactorVIII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','E48:E54');
-KDelFactorVIII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','G48:G54');
-pDelFactorVIII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','K48:K54');
-omeganDelFactorVIII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','L48:L54');
-TDelFactorVIII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','F48:F54');
+DelFactorVIII14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','I48:I54');
+a0DelFactorVIII14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','B48:B54');
+a1DelFactorVIII14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','C48:C54');
+a2DelFactorVIII14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','D48:D54');
+bDelFactorVIII14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','E48:E54');
+KDelFactorVIII14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','G48:G54');
+pDelFactorVIII14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','K48:K54');
+omeganDelFactorVIII14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','L48:L54');
+TDelFactorVIII14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','F48:F54');
 
 [fita0DelFactorVIII14492factors,resfita0DelFactorVIII14492norm] = lsqcurvefit(@fitLinearModel,[1;1],DelFactorVIII14492,a0DelFactorVIII14492,[],[],options)
 [fita1DelFactorVIII14492factors,resfita1DelFactorVIII14492norm] = lsqcurvefit(@fitLinearModel,[1;1],DelFactorVIII14492,a1DelFactorVIII14492,[],[],options)
@@ -49,26 +49,26 @@ TDelFactorVIII14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/
 [fitomeganDelFactorVIII14492factors,resfitomeganDelFactorVIII14492norm] = lsqcurvefit(@fitLinearModel,[1;1],DelFactorVIII14492,omeganDelFactorVIII14492,[],[],options)
 [fitTDelFactorVIII14492factors,resfitTDelFactorVIII14492norm] = lsqcurvefit(@fitLinearModel,[1;1],DelFactorVIII14492,TDelFactorVIII14492,[],[],options)
 
-% DelFactorX14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','I111:I117');
-% a0DelFactorX14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','B111:B117');
-% a1DelFactorX14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','C111:C117');
-% a2DelFactorX14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','D111:D117');
-% bDelFactorX14492 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','E111:E117');
+% DelFactorX14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','I111:I117');
+% a0DelFactorX14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','B111:B117');
+% a1DelFactorX14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','C111:C117');
+% a2DelFactorX14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','D111:D117');
+% bDelFactorX14492 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','E111:E117');
 % 
 % [fita0DelFactorX14492factors,resfita0DelFactorX14492norm] = lsqcurvefit(@fitLinearModel,[1;1],DelFactorX14492,a0DelFactorX14492,[],[],options)
 % [fita1DelFactorX14492factors,resfita1DelFactorX14492norm] = lsqcurvefit(@fitLinearModel,[1;1],DelFactorX14492,a1DelFactorX14492,[],[],options)
 % [fita2DelFactorX14492factors,resfita2DelFactorX14492norm] = lsqcurvefit(@fitLinearModel,[1;1],DelFactorX14492,a2DelFactorX14492,[],[],options)
 % [fitbDelFactorX14492factors,resfitbDelFactorX14492norm] = lsqcurvefit(@fitLinearModel,[1;1],DelFactorX14492,bDelFactorX14492,[],[],options)
 
-DelFactorX14504 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','I146:I151');
-a0DelFactorX14504 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','B146:B151');
-a1DelFactorX14504 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','C146:C151');
-a2DelFactorX14504 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','D146:D151');
-bDelFactorX14504 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','E146:E151');
-KDelFactorX14504 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','G146:G151');
-pDelFactorX14504 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','K146:K151');
-omeganDelFactorX14504 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','L146:L151');
-TDelFactorX14504 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Fits','F146:F151');
+DelFactorX14504 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','I146:I151');
+a0DelFactorX14504 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','B146:B151');
+a1DelFactorX14504 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','C146:C151');
+a2DelFactorX14504 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','D146:D151');
+bDelFactorX14504 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','E146:E151');
+KDelFactorX14504 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','G146:G151');
+pDelFactorX14504 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','K146:K151');
+omeganDelFactorX14504 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','L146:L151');
+TDelFactorX14504 = xlsread('../../Data/Processed/CAT_Spiking_Selection','Fits','F146:F151');
 
 [fita0DelFactorX14504factors,resfita0DelFactorX14504norm] = lsqcurvefit(@fitLinearModel,[1;1],DelFactorX14504,a0DelFactorX14504,[],[],options)
 [fita1DelFactorX14504factors,resfita1DelFactorX14504norm] = lsqcurvefit(@fitLinearModel,[1;1],DelFactorX14504,a1DelFactorX14504,[],[],options)
@@ -296,8 +296,8 @@ set(gca,'FontSize',27)
 %clf
 
 % 14492
-CATDataII = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Dynamic','B2:F121')/1000;
-CATTimeII = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Dynamic','A2:A121');
+CATDataII = xlsread('../../Data/Processed/CAT_Spiking_Selection','Dynamic','B2:F121')/1000;
+CATTimeII = xlsread('../../Data/Processed/CAT_Spiking_Selection','Dynamic','A2:A121');
 [DelIIPeak,DelIIPeakIndex] = max(CATDataII);
 DelIIPeakTime = CATTimeII(DelIIPeakIndex);
 DelIIETP = trapz(CATTimeII,CATDataII);
@@ -316,8 +316,8 @@ R2fitDelayDelII = DetermineLinearModelR2(DelFactorII14492,DelIIDelay',fitDelayDe
 R2fitETPDelII = DetermineLinearModelR2(DelFactorII14492,DelIIETP',fitETPDelIIfactors)
 
 % 14492
-CATDataVIII = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Dynamic','R2:X121')/1000;
-CATTimeVIII = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Dynamic','P2:P121');
+CATDataVIII = xlsread('../../Data/Processed/CAT_Spiking_Selection','Dynamic','R2:X121')/1000;
+CATTimeVIII = xlsread('../../Data/Processed/CAT_Spiking_Selection','Dynamic','P2:P121');
 [DelVIIIPeak,DelVIIIPeakIndex] = max(CATDataVIII);
 DelVIIIPeakTime = CATTimeVIII(DelVIIIPeakIndex);
 DelVIIIETP = trapz(CATTimeVIII,CATDataVIII);
@@ -336,8 +336,8 @@ R2fitDelayDelVIII = DetermineLinearModelR2(DelFactorVIII14492,DelVIIIDelay',fitD
 R2fitETPDelVIII = DetermineLinearModelR2(DelFactorVIII14492,DelVIIIETP',fitETPDelVIIIfactors)
 
 % 14504
-CATDataX = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Dynamic','AA2:AF121')/1000;
-CATTimeX = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Spiking_Selection','Dynamic','Z2:Z121');
+CATDataX = xlsread('../../Data/Processed/CAT_Spiking_Selection','Dynamic','AA2:AF121')/1000;
+CATTimeX = xlsread('../../Data/Processed/CAT_Spiking_Selection','Dynamic','Z2:Z121');
 [DelXPeak,DelXPeakIndex] = max(CATDataX);
 DelXPeakTime = CATTimeX(DelXPeakIndex);
 DelXETP = trapz(CATTimeX,CATDataX);
