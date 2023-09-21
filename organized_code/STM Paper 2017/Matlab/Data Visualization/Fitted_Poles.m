@@ -63,7 +63,7 @@ end
 
 for j=1:length(k0)
     if checkpoleisrightofpair(j) == 1
-        rightrealpolevalue(j) = min(onlyrealpoles(:,j));
+        rightrealpolevalue(j) = min(onlyrealpoles(:,j))
         leftpairrealpolevalue(j) = min(realpartofpoleswithcomplexparts(:,j));
         leftpairimagpolevalue(j) = min(complexpartofpoleswithcomplexparts(:,j));
         leftpairmagpolevalue(j) = sqrt(leftpairrealpolevalue(j)^2 + leftpairimagpolevalue(j)^2);

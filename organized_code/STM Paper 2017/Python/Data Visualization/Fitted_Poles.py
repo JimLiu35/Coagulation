@@ -106,4 +106,26 @@ for j in range(k0.shape[0]):
         leftpairmagpolevalue[j] = np.nan
         leftpairanglepolevalue[j] = np.nan
 
+fh = plt.figure(figsize=(1,2))
+plt.subplot(121)
+plotmkcolors = ['r','g','b','k','m','c','y']
+plotmkstyles = ['^','s','d','x','o','*','+','v','<','>','p','h']
+mkcolorctr = 0
+mkstylectr = 0
+for j in range(k0.shape[0]):
+    plt.scatter(np.real(p[:,j]), np.imag(p[:,j]), s=12, c=plotmkcolors[mkcolorctr],
+                marker=plotmkstyles[mkstylectr], linewidth=6)
+    mkcolorctr += 1
+    if mkcolorctr >= len(plotmkcolors):
+        mkcolorctr = 0
+        mkstylectr = mkstylectr + 0
 # print(sysnodel[0])
+plt.xlabel('Real Axis')
+plt.ylabel('Imaginary Axis')
+plt.xlim(-0.6, 0.043)
+plt.ylim(-0.857, 0.857)
+plt.plot([-1.4,0.1],[0,0],'k:');
+plt.plot([0,0],[-2,2],'k:');
+
+
+plt.show()
