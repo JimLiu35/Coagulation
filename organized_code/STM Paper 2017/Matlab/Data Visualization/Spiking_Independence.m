@@ -31,7 +31,7 @@ hold on
 grid on
 box on
 
-IIspikingDataValues = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Spiking/Misc_Plasma/14492/spiking_all_factors','Sheet1','B3:H9');
+IIspikingDataValues = xlsread('../../Data/Spiking/Misc_Plasma/14492/spiking_all_factors','Sheet1','B3:H9');
 
 IIpercentactivity = IIspikingDataValues(:,1);
 VIIpercentactivity = IIspikingDataValues(:,2);
@@ -93,7 +93,7 @@ hold on
 grid on
 box on
 
-VIIIspikingDataValues = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Spiking/Misc_Plasma/14492/spiking_all_factors','Sheet1','B11:H19');
+VIIIspikingDataValues = xlsread('../../Data/Spiking/Misc_Plasma/14492/spiking_all_factors','Sheet1','B11:H19');
 
 IIpercentactivity = VIIIspikingDataValues(:,1);
 VIIpercentactivity = VIIIspikingDataValues(:,2);
@@ -156,7 +156,7 @@ hold on
 grid on
 box on
 
-IXspikingDataValues = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Spiking/Misc_Plasma/14492/spiking_all_factors','Sheet1','B21:H27');
+IXspikingDataValues = xlsread('../../Data/Spiking/Misc_Plasma/14492/spiking_all_factors','Sheet1','B21:H27');
 
 IIpercentactivity = IXspikingDataValues(:,1);
 VIIpercentactivity = IXspikingDataValues(:,2);
@@ -218,7 +218,7 @@ hold on
 grid on
 box on
 
-XspikingDataValues = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Spiking/Misc_Plasma/14492/spiking_all_factors','Sheet1','B29:H34');
+XspikingDataValues = xlsread('../../Data/Spiking/Misc_Plasma/14492/spiking_all_factors','Sheet1','B29:H34');
 
 IIpercentactivity = XspikingDataValues(:,1);
 VIIpercentactivity = XspikingDataValues(:,2);
@@ -281,7 +281,7 @@ set(tD, 'FontSize',31, 'FontWeight', 'bold')
 % hold on
 % grid on
 % 
-% X_VIIIspikingDataValues = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Spiking/Misc_Plasma/14492/spiking_all_factors','Sheet1','B36:H41');
+% X_VIIIspikingDataValues = xlsread('../../Data/Spiking/Misc_Plasma/14492/spiking_all_factors','Sheet1','B36:H41');
 % 
 % IIpercentactivity = X_VIIIspikingDataValues(:,1);
 % VIIpercentactivity = X_VIIIspikingDataValues(:,2);

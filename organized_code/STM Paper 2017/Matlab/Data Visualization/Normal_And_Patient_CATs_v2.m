@@ -7,26 +7,26 @@ clc;
 
 %Normal Thrombograms
 
-NormalTime1 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Normals','Dynamic','A2:A121');
-NormalCATSet1 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Normals','Dynamic','B2:K121');
+NormalTime1 = xlsread('../../Data/Processed/CAT_Normals','Dynamic','A2:A121');
+NormalCATSet1 = xlsread('../../Data/Processed/CAT_Normals','Dynamic','B2:K121');
 
-NormalTime2 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Normals','Dynamic','M2:M121');
-NormalCATSet2 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Normals','Dynamic','N2:R121');
+NormalTime2 = xlsread('../../Data/Processed/CAT_Normals','Dynamic','M2:M121');
+NormalCATSet2 = xlsread('../../Data/Processed/CAT_Normals','Dynamic','N2:R121');
 
-NormalTime3 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Normals','Dynamic','T2:T121');
-NormalCATSet3 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Normals','Dynamic','U2:Y121');
+NormalTime3 = xlsread('../../Data/Processed/CAT_Normals','Dynamic','T2:T121');
+NormalCATSet3 = xlsread('../../Data/Processed/CAT_Normals','Dynamic','U2:Y121');
 
 
 %Patient Thrombograms
 
-PatientTime1 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Dynamic','A2:A121');
-PatientCATSet1 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Dynamic','B2:L121');
+PatientTime1 = xlsread('../../Data/Processed/CAT_Trauma','Dynamic','A2:A121');
+PatientCATSet1 = xlsread('../../Data/Processed/CAT_Trauma','Dynamic','B2:L121');
 
-PatientTime2 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Dynamic','N2:N121');
-PatientCATSet2 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Dynamic','O2:AI121');
+PatientTime2 = xlsread('../../Data/Processed/CAT_Trauma','Dynamic','N2:N121');
+PatientCATSet2 = xlsread('../../Data/Processed/CAT_Trauma','Dynamic','O2:AI121');
 
-PatientTime3 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Dynamic','AK2:AK121');
-PatientCATSet3 = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Dynamic','AL2:AS121');
+PatientTime3 = xlsread('../../Data/Processed/CAT_Trauma','Dynamic','AK2:AK121');
+PatientCATSet3 = xlsread('../../Data/Processed/CAT_Trauma','Dynamic','AL2:AS121');
 
 %% Plot Thrombograms
 
@@ -101,7 +101,7 @@ set(gca,'LineWidth',1.5)
 % NORMALS
 
 %obtain data
-MCADataValues = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Normals','Dynamic','A2:Y121');
+MCADataValues = xlsread('../../Data/Processed/CAT_Normals','Dynamic','A2:Y121');
 
 
 for VisualNum = 1:20
@@ -131,7 +131,7 @@ end
 % TRAUMA
 
 %obtain data
-MCADataValues = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Dynamic','A2:AS121');
+MCADataValues = xlsread('../../Data/Processed/CAT_Trauma','Dynamic','A2:AS121');
 
 
 for VisualNum = 1:40

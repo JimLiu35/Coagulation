@@ -11,7 +11,7 @@ options = optimset('MaxFunEvals',1e6,'MaxIter',1e6,'TolFun',1e-6,'TolX',1e-6);
 % TRAUMA
 
 %obtain data
-MCADataValues = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Dynamic','A2:AS121');
+MCADataValues = xlsread('../../Data/Processed/CAT_Trauma','Dynamic','A2:AS121');
 
 
 for VisualNum = 1:40
@@ -41,7 +41,7 @@ end
 
 % Read in age, ISS, PTT, INR
 
-MCADataValues = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Fits','S2:V41');
+MCADataValues = xlsread('../../Data/Processed/CAT_Trauma','Fits','S2:V41');
 
 Age = MCADataValues(:,1);
 ISS = MCADataValues(:,2);

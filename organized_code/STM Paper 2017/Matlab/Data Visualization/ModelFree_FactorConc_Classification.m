@@ -10,8 +10,8 @@ format long e;
 
 % Read in concentrations, first normals then trauma patients
 
-MCADataValues = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Normals','Fits','B2:M21');
-MCADataValues = [MCADataValues;xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Fits','B2:M41')];
+MCADataValues = xlsread('../../Data/Processed/CAT_Normals','Fits','B2:M21');
+MCADataValues = [MCADataValues;xlsread('../../Data/Processed/CAT_Trauma','Fits','B2:M41')];
 
 II_0 = MCADataValues(:,6);
 V_0 = MCADataValues(:,7);
@@ -22,8 +22,8 @@ X_0 = MCADataValues(:,11);
 ATIII_0 = MCADataValues(:,12);
 
 % Also read in the identifiers
-ACIT = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Normals','Fits','A2:A21');
-ACIT = [ACIT;xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Fits','A2:A41')];
+ACIT = xlsread('../../Data/Processed/CAT_Normals','Fits','A2:A21');
+ACIT = [ACIT;xlsread('../../Data/Processed/CAT_Trauma','Fits','A2:A41')];
 
 
 %% K-means clustering
@@ -165,7 +165,7 @@ set(tD, 'FontSize',31, 'FontWeight', 'bold')
 
 % Read in age, ISS, PTT, INR
 
-MCADataValues = xlsread('/Users/amenezes/Documents/Work/Research/Projects/Coagulation/2014/Data/Processed/CAT_Trauma','Fits','S2:V41');
+MCADataValues = xlsread('../../Data/Processed/CAT_Trauma','Fits','S2:V41');
 
 Age = MCADataValues(:,1);
 ISS = MCADataValues(:,2);
