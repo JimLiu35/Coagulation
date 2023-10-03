@@ -61,9 +61,18 @@ factor_concen_Tra_sample_initial(1,2)=64 ;
 factor_concen_Tra_sample_initial(1,3)=100 ;
 factor_concen_Tra_sample_initial(1,4)=110 ;
 factor_concen_Tra_sample_initial(1,5)=86 ;
-factor_concen_Tra_sample_initial(1,6)=188 ;
+factor_concen_Tra_sample_initial(1,6)=192 ;
 factor_concen_Tra_sample_initial(1,7)=87 ;
 factor_concen_Tra_sample_initial(1,8)=113 ;
+
+% factor_concen_Tra_sample_initial(1,1)=60 ;
+% factor_concen_Tra_sample_initial(1,2)=64 ;
+% factor_concen_Tra_sample_initial(1,3)=100 ;
+% factor_concen_Tra_sample_initial(1,4)=60 ;
+% factor_concen_Tra_sample_initial(1,5)=127.931 ;
+% factor_concen_Tra_sample_initial(1,6)=140 ;
+% factor_concen_Tra_sample_initial(1,7)=87 ;
+% factor_concen_Tra_sample_initial(1,8)=113 ;
  
 %% CAT Variation with factor recommendation adjustments Sample by sample 
 T3 = linspace(0,42,42001)';
@@ -71,6 +80,18 @@ FactorConcentration_History_TraSample=[];
 Factor_tag={'II', 'V', 'VII' , 'IX', 'X', 'VIII', 'ATIII', 'PC'};
 FactorConcentration_History_TraSample=[FactorConcentration_History_TraSample; factor_concen_Tra_sample_initial];
 
+%% Plot patient's CAT Profile before Factors' modifications
+% factor_concen_Tra_sample=FactorConcentration_History_TraSample(end,:);
+% 
+% %Estimate the CAT model using the update coagulation factor set 
+% Trau_1_coeff=factor_concen_Tra_sample*factor_coeff_All_Train+const_All_Train;
+% sys_est_change_Tra1=tf(Trau_1_coeff(4),[1 Trau_1_coeff(3) Trau_1_coeff(2) Trau_1_coeff(1)],'InputDelay',Trau_1_coeff(5));
+% Y_est_change_Tra= 5*impulse(sys_est_change_Tra1,T3);
+% plot(T3, Y_est_change_Tra)
+% grid on
+
+
+%% Begin Adjustments
 %STEP 1: Correct factor V to normal range 
 if FactorConcentration_History_TraSample(1,6)>400
     FactorConcentration_History_TraSample(1,6)=FactorConcentration_History_TraSample(1,6)/2;
@@ -161,7 +182,7 @@ Factor_Tra_changes_treat{1,j}=[factor_concen_Tra_sample(j) Y_est_change_Tra_peak
         FactorSelected=FactorSelected+change_parameter ;
         factor_concen_Tra_sample(j)=FactorSelected;
         Trau_1_coeff=factor_concen_Tra_sample*factor_coeff_All_Train+const_All_Train;
-        sys_est_change_Tra1=tf(Trau_1_coeff(4),[1 Trau_1_coeff(3) Trau_1_coeff(2) Trau_1_coeff(1)],'InputDelay',Trau_1_coeff(5));
+        sys_est_change_Tra1=tf(Trau_1_coeff(4),[1 Trau_1_coeff(3) Trau_1_coeff(2) Trau_1_coeff(1)],'InputDelay',Trau_1_coeff(5))
         Y_est_change_Tra= 5*impulse(sys_est_change_Tra1,T3);
         
         [Y_est_change_Tra_peak,i_m]=max(Y_est_change_Tra);
@@ -290,6 +311,7 @@ Y_est_change_Tra= 5*impulse(sys_est_change_Tra1,T3);
 [Y_est_change_Tra_peak,i_m]=max(Y_est_change_Tra);
 T_est_change_Tra_peak= T3(i_m) ;
 AreaUnderCurve= trapz(T3,Y_est_change_Tra ) ;
+plot(T3, Y_est_change_Tra)
 DelayCurve=DetermineDelayTherapy(T3,Y_est_change_Tra);
 Factor_Tra_changes_treat{1,j}=[factor_concen_Tra_sample(j) Y_est_change_Tra_peak T_est_change_Tra_peak AreaUnderCurve DelayCurve];
 
@@ -300,12 +322,20 @@ Factor_Tra_changes_treat{1,j}=[factor_concen_Tra_sample(j) Y_est_change_Tra_peak
         FactorSelected=FactorSelected+change_parameter ;
         factor_concen_Tra_sample(j)=FactorSelected;
         Trau_1_coeff=factor_concen_Tra_sample*factor_coeff_All_Train+const_All_Train;
-        sys_est_change_Tra1=tf(Trau_1_coeff(4),[1 Trau_1_coeff(3) Trau_1_coeff(2) Trau_1_coeff(1)],'InputDelay',Trau_1_coeff(5));
+        sys_est_change_Tra1=tf(Trau_1_coeff(4),[1 Trau_1_coeff(3) Trau_1_coeff(2) Trau_1_coeff(1)],'InputDelay',Trau_1_coeff(5))
         Y_est_change_Tra= 5*impulse(sys_est_change_Tra1,T3);      
         [Y_est_change_Tra_peak,i_m]=max(Y_est_change_Tra);
         T_est_change_Tra_peak= T3(i_m) ;
         AreaUnderCurve= trapz(T3,Y_est_change_Tra ) ;
-        DelayCurve=DetermineDelayTherapy(T3,Y_est_change_Tra);
+%         if max(Y_est_change_Tra) <=0
+%             continue;
+%         end
+        fprintf("Current loop index i = %i \n", i)
+        fprintf("length(Y_est_change_Tra) is %i \n", length(Y_est_change_Tra))
+        plot(T3,Y_est_change_Tra)
+        grid on
+        hold on
+        DelayCurve=DetermineDelayTherapy(T3,Y_est_change_Tra)
         Factor_Tra_changes_treat{i+1,j}=[FactorSelected Y_est_change_Tra_peak T_est_change_Tra_peak AreaUnderCurve DelayCurve];
 
     end

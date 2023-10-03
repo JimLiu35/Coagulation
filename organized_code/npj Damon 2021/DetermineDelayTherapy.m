@@ -5,12 +5,14 @@ function Delay = DetermineDelayTherapy(Tcheck,MeasuredThrombin)
 [MaxThrombin,MaxThrombinIndex] = max(MeasuredThrombin);
 TimeMaxThrombin = Tcheck(MaxThrombinIndex);
 
-SlopeUpperValueIndex = find(MeasuredThrombin<=0.5*MaxThrombin & Tcheck<=TimeMaxThrombin,1,'last');
+SlopeUpperValueIndex = find(MeasuredThrombin<=0.5*MaxThrombin & Tcheck<=TimeMaxThrombin,1,'last')
 SlopeUpperValue = MeasuredThrombin(SlopeUpperValueIndex);
 SlopeUpperTime = Tcheck(SlopeUpperValueIndex);
 
 %calculate the slope with the next lower data point
+% fprintf("MeasuredThrombin length is %i \n", SlopeUpperValueIndex-1)
 SlopeLowerValue = MeasuredThrombin(SlopeUpperValueIndex-1);
+
 SlopeLowerTime = Tcheck(SlopeUpperValueIndex-1);
 Slope = (SlopeUpperValue - SlopeLowerValue)/(SlopeUpperTime-SlopeLowerTime);
 
