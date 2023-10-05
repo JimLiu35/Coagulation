@@ -61,20 +61,20 @@ factor_concen_Tra_sample_initial(1,2)=64 ;
 factor_concen_Tra_sample_initial(1,3)=100 ;
 factor_concen_Tra_sample_initial(1,4)=110 ;
 factor_concen_Tra_sample_initial(1,5)=86 ;
-factor_concen_Tra_sample_initial(1,6)=188 ;
+factor_concen_Tra_sample_initial(1,6)=134 ;
 factor_concen_Tra_sample_initial(1,7)=87 ;
 factor_concen_Tra_sample_initial(1,8)=113 ;
- 
+
 %% CAT Variation with factor recommendation adjustments Sample by sample 
 T3 = linspace(0,42,42001)';
 FactorConcentration_History_TraSample=[];
 Factor_tag={'II', 'V', 'VII' , 'IX', 'X', 'VIII', 'ATIII', 'PC'};
 FactorConcentration_History_TraSample=[FactorConcentration_History_TraSample; factor_concen_Tra_sample_initial];
 
-%STEP 1: Correct factor V to normal range 
-if FactorConcentration_History_TraSample(1,6)>400
-    FactorConcentration_History_TraSample(1,6)=FactorConcentration_History_TraSample(1,6)/2;
-end
+% STEP 1: Correct factor V to normal range 
+% if FactorConcentration_History_TraSample(1,6)>400
+%     FactorConcentration_History_TraSample(1,6)=FactorConcentration_History_TraSample(1,6)/2;
+% end
 j=2; %factor V
 recommend_factor_update=min(max(60, FactorConcentration_History_TraSample(end,j)),140);
 FactorConcentration_History_TraSample=[FactorConcentration_History_TraSample; FactorConcentration_History_TraSample(end,:)];
