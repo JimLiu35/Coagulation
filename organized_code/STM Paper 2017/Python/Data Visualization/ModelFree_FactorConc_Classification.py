@@ -42,13 +42,30 @@ pca = PCA(svd_solver="full").fit(MCADataValues[:,6:13])
 matlab_equi_coeff = pca.components_.T
 matlab_equi_score = pca.fit_transform(MCADataValues[:,6:13])
 
-print(matlab_equi_score[0,:])
+print(matlab_equi_score.shape)
 fh = plt.figure(figsize=(2,2))
-ax = fh.add_subplot(projection='3d')
-# plt.subplot(221)
+ax = fh.add_subplot(221, projection='3d', frame_on=True)
 ax.scatter(matlab_equi_score[0:20,1],
            matlab_equi_score[0:20,2],
            matlab_equi_score[0:20,3],
-           s=150, c='g',marker='x',
-           linewidth=6)
-plt.show()
+           s=30, c='g',marker='d',
+           linewidth=2,
+           label='Normal')
+ax.scatter(matlab_equi_score[21:61,1],
+           matlab_equi_score[21:61,2],
+           matlab_equi_score[21:61,3],
+           s=30, c='r',marker='o',
+           linewidth=2,
+           label='Trauma')
+
+ax.set_xlabel('Component 1')
+ax.set_ylabel('Component 2')
+ax.set_zlabel('Component 3')
+ax.set_title('A')
+
+ax.axes.set_xlim3d(left=-300, right=410)
+ax.axes.set_ylim3d(bottom=-100, top=335)
+ax.axes.set_zlim3d(bottom=-100, top=100)
+ax.legend()
+
+# plt.show()
