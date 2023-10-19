@@ -1,4 +1,4 @@
-function ModelFree_FactorConc_Classification
+ function ModelFree_FactorConc_Classification
 
 clear all;
 close all;
@@ -53,7 +53,7 @@ ylabel('Component 2')
 zlabel('Component 3')
 tA = title('A');
 axis([-300 410 -100 335 -100 100])
-h_legA = legend([p1 p2],{'Normal','Trauma'},2);
+h_legA = legend([p1 p2],{'Normal','Trauma'},'Location', 'northwest');
 figureHandle = gcf;
 % make all text in the figure to size 30
 set(findall(figureHandle,'type','text'),'fontSize',27)
@@ -72,7 +72,7 @@ xlabel('Component 1')
 ylabel('Component 2')
 tB = title('B');
 axis([-300 410 -100 335])
-h_legB = legend([p1 p2],{'Normal','Trauma'},4);
+h_legB = legend([p1 p2],{'Normal','Trauma'}, 'Location', 'northeast');
 figureHandle = gcf;
 % make all text in the figure to size 30
 set(findall(figureHandle,'type','text'),'fontSize',27)
@@ -101,7 +101,7 @@ xlabel('Component 1')
 ylabel('Component 2')
 tC = title('C');
 axis([-300 410 -100 335])
-h_legC = legend([p1 p2],{'KM Cluster 1','KM Cluster 2'},4);
+h_legC = legend([p1 p2],{'KM Cluster 1','KM Cluster 2'}, 'Location', 'northeast');
 figureHandle = gcf;
 % make all text in the figure to size 30
 set(findall(figureHandle,'type','text'),'fontSize',27)
@@ -121,8 +121,10 @@ theclass(21:60) = -1; %so 1 indicates normal, -1 indicates trauma
 % Train an SVM classifier with KernelFunction set to 'rbf' and BoxConstraint set to Inf. Plot the decision boundary and flag the support vectors.
 
 % Train the SVM Classifier
-svmStruct = svmtrain(data3,theclass,'kernel_function','rbf',...
-    'boxconstraint',Inf);
+% svmStruct = svmtrain(data3,theclass,'kernel_function','rbf',...
+%     'boxconstraint',Inf);
+svmStruct = fitcsvm(data3,theclass,'KernelFunction','rbf',...
+    'BoxConstraint',Inf);
 
 % Plot the original data
 subplot(2,2,4)
@@ -131,17 +133,19 @@ hold on
 p2 = scatter(Score(21:60,1),Score(21:60,2),150,'Red','filled','o','MarkerEdgeColor','Black');
 
 % Plot the support vectors
-p3 = scatter(data3(svmStruct.SupportVectorIndices,1),data3(svmStruct.SupportVectorIndices,2),150,'Black','s','MarkerEdgeColor','Black');
+% p3 = scatter(data3(svmStruct.SupportVectorIndices,1),data3(svmStruct.SupportVectorIndices,2),150,'Black','s','MarkerEdgeColor','Black');
+p3 = scatter(svmStruct.SupportVectors(:,1),svmStruct.SupportVectors(:,2),150,'Black','s','MarkerEdgeColor','Black');
 
 % Determine the decision boundary / Predict scores over the grid
 d = 0.5;
 [x1Grid,x2Grid] = meshgrid(-50:d:50,...
     -100:d:0);
 xGrid = [x1Grid(:),x2Grid(:)];
-Group = svmclassify(svmStruct,xGrid);
+% Group = svmclassify(svmStruct,xGrid);
+Group = predict(svmStruct, [x1Grid(:), x2Grid(:)]);
 
 % Plot the decision boundary
-[contourdata,p4] = contour(x1Grid,x2Grid,reshape(Group,size(x1Grid)),[0 0],'k','Linewidth',1.5);
+[contourdata,p4] = contour(x1Grid,x2Grid,reshape(Group,size(x1Grid,1),size(x2Grid,2)),[0 0],'k','Linewidth',1.5);
 
 % Complete the plot
 grid on
@@ -150,7 +154,7 @@ xlabel('Component 1')
 ylabel('Component 2')
 tD = title('D');
 axis([-50 50 -100 0])
-h_leg = legend([p3 p4],{'Support Vector','Decision Curve'},2);
+h_leg = legend([p3 p4],{'Support Vector','Decision Curve'}, 'Location', 'northwest');
 figureHandle = gcf;
 % make all text in the figure to size 30
 set(findall(figureHandle,'type','text'),'fontSize',27)
