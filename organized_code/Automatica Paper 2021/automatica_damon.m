@@ -17,14 +17,19 @@ d3 = 0.2727;
 
 gamma_hat = 1;
 kd_hat = 1;
-lambda = .1;
+% lambda = .1;
 alpha = 5;
-k = 0.15;
+% k = 0.15;
+% Damon's parameters
+lambda = 0.2;
+k = 0.1;
 
 % Automatica Paper
-A = [-d1 1 0; 0 -d2 1; 0 0 -d3];
+% A = [-d1 1 0; 0 -d2 1; 0 0 -d3];
 % Sci Trans Med Paper
 % A = [-d1 1 0; -d2 0 1; -d3 0 0];
+% Damon's coagulation model
+A = [-2.2306 1 0; -0.3*2.4752 0 1; -0.25*0.5370 0 0];
 B = [0 0 1]';
 
 % Initial Conditions
@@ -40,14 +45,13 @@ N = 2000;
 ts = t0:t_hat/N:tf;
 
 % Reference Signal
-xr = 125 * (tanh(0.15 * ts)).^2;
+xr = 200 * (tanh(0.15 * ts)).^2;
 
 % Initialize states and input vector
 xs = zeros(3, length(ts));
 es = zeros(3, length(ts));
 eus = zeros(1, length(ts));
 us = zeros(1, length(ts));
-u_actual = zeros(1, length(ts));
 dt = t_hat/N;
 
 % Convert system to discrete time
@@ -73,15 +77,8 @@ for i = 1:length(ts)
         es(:,i) = [e1 e2 e3];
         continue
     end
-    % Get delayed input
-    if (ts(i) < t_hat)
-        u_delay = 0;
-    else
-        u_delay = us(i - N);
-    end
-    % u_actual(i) = u_delay;
     % Update State Variables
-    xs(:, i) = state_eq(xs(:, i-1), A, B, u_delay, dt);
+    xs(:, i) = state_eq(xs(:, i-1), A, B, u, dt);
     % Calculate Error Signals
     e1 = xr(i) - xs(1, i);
     dxr = Euler(xr(i-1), xr(i), dt);
@@ -106,8 +103,8 @@ for i = 1:length(ts)
     if i < t_hat/dt + 1
         eu = 0;
     else
-        eu = - (u - us(i-N)); % This eu is consistent with paper description
-%        eu = - (u - gus(i - N)); % This eu is the one defined in Damon's model
+        % eu = - (u - us(i-N)); % This eu is consistent with paper description
+       eu = - (u - gus(i - N)); % This eu is the one defined in Damon's model
     end
     eus(i) = eu;
     v = v + dt * k * (lambda * es(3, i-1) + alpha * eus(i-1));
@@ -166,8 +163,13 @@ global gus;
 beta = 50;
 eta = 75;
 ks = 0.0224;
-g = 0.5 * beta + 0.5 * beta * (tanh(0.5 * ks ...
-    * (u - eta)));
+% g = 0.5 * beta + 0.5 * beta * (tanh(0.5 * ks ...
+%     * (u - eta)));
+% Damon's g function
+g = u;
+if g > 50
+    g = 50;
+end
 gus(end+1) = g;
 xas = xs + (Ad * xs + Bd * g) * dt;
 end
