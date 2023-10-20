@@ -131,7 +131,7 @@ plot(ts, xs(1, :), 'black', 'DisplayName', 'x1', 'LineWidth', 2)
 legend
 xlabel('Time [min]')
 ylabel('Thrombin(IIa)')
-title('$\beta=100,\eta=100,k_s=0.0224$','Interpreter', 'latex')
+title('$\beta=50,\eta=75,k_s=0.0224$','Interpreter', 'latex')
 ax = gca;
 ax.FontSize = 20; 
 
@@ -164,7 +164,7 @@ function xas = state_eq(xs, Ad, Bd, u, dt)
 global gus;
 % beta = 87;
 beta = 50;
-eta = 75;
+eta = 280;
 ks = 0.0224;
 g = 0.5 * beta + 0.5 * beta * (tanh(0.5 * ks ...
     * (u - eta)));
