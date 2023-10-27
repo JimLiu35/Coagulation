@@ -46,14 +46,16 @@ end
 ts = t0:dt:tf;
 
 % Reference Signal
-xr = 200 * (tanh(0.15 * ts)).^2;
+% xr = 130 * (tanh(0.15 * ts)).^2;
+xr = 130 + 30.*sin(0.17*ts);
 
 % Initialize states and input vector
 xs = zeros(3, length(ts));
 es = zeros(3, length(ts));
-eus = zeros(1, length(ts));
-us = zeros(1, length(ts));
-u_actual = zeros(1, length(ts));
+eus = zeros(length(ts), 1);
+us = zeros(length(ts), 1);
+u_actual = zeros(length(ts), 1);
+vs = zeros(length(ts), 1);
 
 % Convert system to discrete time
 Ad = expm(A*dt);
@@ -72,9 +74,9 @@ for i = 1:length(ts)
         us(i) = u;
         vs(i) = 0;
         dvs(i) = 0;
-        e1 = 0 - x0(1);
-        e2 = 0;
-        e3 = -1000;
+        e1 = xr(i) - x0(1);
+        e2 = 0 + e1;
+        e3 = 0 + e2 + e1;
         es(:,i) = [e1 e2 e3];
         continue
     end
@@ -100,12 +102,12 @@ for i = 1:length(ts)
     if i == 2
         % Second order derivate approximation
         d2x1 = SecOrder(x0(1), xs(1, i-1), xs(1, i), dt);
-        d2xr = SecOrder(0, xr(i-1), xr(i), dt);
+        d2xr = SecOrder(xr(i-1), xr(i-1), xr(i), dt);
     else
         % Second order derivate approximation
         d2x1 = SecOrder(xs(1, i-2), xs(1, i-1), xs(1, i), dt);
         d2xr = SecOrder(xr(i-2), xr(i-1), xr(i), dt);
-        e3 = d2xr - d2x1 + 2 * de1 + 2 * e1;
+        % e3 = d2xr - d2x1 + 2 * de1 + 2 * e1;
     end
     e3 = d2xr - d2x1 + 2 * de1 + 2 * e1;
     d2e1(i) = d2xr - d2x1;
@@ -119,7 +121,9 @@ for i = 1:length(ts)
 %        eu = - (u - gus(i - N)); % This eu is the one defined in Damon's model
     end
     eus(i) = eu;
-    v = v + dt * k * (lambda * es(3, i-1) + alpha * eus(i-1));
+    % v = v + dt * k * (lambda * es(3, i-1) + alpha * eus(i-1));
+    vdot = k * (lambda * es(3, i-1) + alpha * eus(i-1));
+    v = vs(i-1) + dt * vdot;
     u = (sign(0.5 * (sign(e1) + 1))) * ...
         (k * (e3 - es(3,1)) + v);
     us(i) = u;
@@ -137,6 +141,8 @@ hold on
 grid on
 box on
 plot(ts, xs(1, :), 'black', 'DisplayName', 'x1', 'LineWidth', 2)
+plot(ts, 210 * ones(size(ts)), ':', 'LineWidth', 2)
+plot(ts, 60 * ones(size(ts)), ':', 'LineWidth', 2)
 legend
 xlabel('Time [min]')
 ylabel('Thrombin(IIa)')

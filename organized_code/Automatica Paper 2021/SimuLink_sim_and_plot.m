@@ -1,5 +1,5 @@
 % This file runs the SimuLink Model and generate plots
-clear
+% clear
 close all
 clc
 
@@ -13,7 +13,7 @@ plot(simout.tout, simout.x1.data, 'black','DisplayName', '$x_1(t)$', 'LineWidth'
 legend('Interpreter', 'latex')
 xlabel('Time [min]')
 ylabel('Thrombin(IIa)')
-title('$\beta=100,\eta=100,k_s=0.0224$','Interpreter', 'latex')
+title('$\beta=50,\eta=75,k_s=0.0224$','Interpreter', 'latex')
 ax = gca;
 ax.FontSize = 20; 
 
