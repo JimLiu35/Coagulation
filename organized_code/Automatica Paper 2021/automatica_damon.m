@@ -77,8 +77,18 @@ for i = 1:length(ts)
         es(:,i) = [e1 e2 e3];
         continue
     end
+    % Get delayed input
+    if (t_hat ~=0 )
+        if (ts(i) < t_hat)
+            u_delay = 0;
+        else
+            u_delay = us(i - N);
+        end
+    else
+        u_delay = u;
+    end
     % Update State Variables
-    xs(:, i) = state_eq(xs(:, i-1), A, B, u, dt);
+    xs(:, i) = state_eq(xs(:, i-1), A, B, u_delay, dt);
     % Calculate Error Signals
     e1 = xr(i) - xs(1, i);
     dxr = Euler(xr(i-1), xr(i), dt);
@@ -128,7 +138,7 @@ plot(ts, xs(1, :), 'black', 'DisplayName', 'x1', 'LineWidth', 2)
 legend
 xlabel('Time [min]')
 ylabel('Thrombin(IIa)')
-title('$\beta=100,\eta=100,k_s=0.0224$','Interpreter', 'latex')
+% title('$\beta=50,\eta=75,k_s=0.0224$','Interpreter', 'latex')
 ax = gca;
 ax.FontSize = 20; 
 

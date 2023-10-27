@@ -33,14 +33,20 @@ tf = 60;
 x0 = [500; 50; 5];
 
 % Input Delay
-t_hat = gamma_hat * x0(3) ^ (-kd_hat);
+% t_hat = gamma_hat * x0(3) ^ (-kd_hat);
+t_hat = 0;
 
 % Time Span
 N = 2000;
-ts = t0:t_hat/N:tf;
+if t_hat ~= 0
+    dt = t_hat/N;
+else
+    dt = 0.001;
+end
+ts = t0:dt:tf;
 
 % Reference Signal
-xr = 125 * (tanh(0.15 * ts)).^2;
+xr = 200 * (tanh(0.15 * ts)).^2;
 
 % Initialize states and input vector
 xs = zeros(3, length(ts));
@@ -48,7 +54,6 @@ es = zeros(3, length(ts));
 eus = zeros(1, length(ts));
 us = zeros(1, length(ts));
 u_actual = zeros(1, length(ts));
-dt = t_hat/N;
 
 % Convert system to discrete time
 Ad = expm(A*dt);
@@ -74,10 +79,14 @@ for i = 1:length(ts)
         continue
     end
     % Get delayed input
-    if (ts(i) < t_hat)
-        u_delay = 0;
+    if (t_hat ~=0 )
+        if (ts(i) < t_hat)
+            u_delay = 0;
+        else
+            u_delay = us(i - N);
+        end
     else
-        u_delay = us(i - N);
+        u_delay = u;
     end
     % u_actual(i) = u_delay;
     % Update State Variables
@@ -103,7 +112,7 @@ for i = 1:length(ts)
     es(:,i) = [e1 e2 e3];
     
     % Calculate Error signal for Input Delay
-    if i < t_hat/dt + 1
+    if t_hat == 0 || i < t_hat/dt + 1
         eu = 0;
     else
         eu = - (u - us(i-N)); % This eu is consistent with paper description
@@ -164,7 +173,7 @@ function xas = state_eq(xs, Ad, Bd, u, dt)
 global gus;
 % beta = 87;
 beta = 50;
-eta = 280;
+eta = 75;
 ks = 0.0224;
 g = 0.5 * beta + 0.5 * beta * (tanh(0.5 * ks ...
     * (u - eta)));
